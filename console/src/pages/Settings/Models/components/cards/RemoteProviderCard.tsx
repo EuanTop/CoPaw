@@ -136,7 +136,7 @@ export function RemoteProviderCard({
   const wrappedTitleLine1 =
     titleWords.length > 1 ? titleWords.slice(0, -1).join(" ") : provider.name;
   const wrappedTitleLine2 =
-    titleWords.length > 1 ? titleWords[titleWords.length - 1] : provider.name;
+    titleWords.length > 1 ? titleWords[titleWords.length - 1] : "";
 
   const statusLabelMatch = statusLabel.match(/^(.+?)\s*[（(](.+)[）)]\s*$/);
   const statusMainText = statusLabelMatch?.[1]?.trim() ?? statusLabel;
