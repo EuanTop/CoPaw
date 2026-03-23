@@ -84,11 +84,17 @@ def _normalize_retry_config(retry_config: RetryConfig | None) -> RetryConfig:
     """Normalize externally supplied retry config into safe bounds."""
     if retry_config is None:
         return RetryConfig()
+    normalized_backoff_base = max(0.1, retry_config.backoff_base)
+    normalized_backoff_cap = max(
+        0.5,
+        retry_config.backoff_cap,
+        normalized_backoff_base,
+    )
     return RetryConfig(
         enabled=retry_config.enabled,
         max_retries=max(1, retry_config.max_retries),
-        backoff_base=max(0.1, retry_config.backoff_base),
-        backoff_cap=max(0.1, retry_config.backoff_cap),
+        backoff_base=normalized_backoff_base,
+        backoff_cap=normalized_backoff_cap,
     )
 
 

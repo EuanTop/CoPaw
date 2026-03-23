@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from copaw.config.config import (
     AgentProfileConfig,
@@ -287,3 +288,12 @@ def test_agent_running_config_llm_retry_persists(
     assert reloaded_config.running.llm_max_retries == 5
     assert reloaded_config.running.llm_backoff_base == 0.5
     assert reloaded_config.running.llm_backoff_cap == 8.0
+
+
+def test_agent_running_config_rejects_backoff_cap_below_base():
+    """Test that backoff cap cannot be lower than backoff base."""
+    with pytest.raises(ValidationError):
+        AgentsRunningConfig(
+            llm_backoff_base=2.0,
+            llm_backoff_cap=1.0,
+        )

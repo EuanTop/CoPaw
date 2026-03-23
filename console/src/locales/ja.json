@@ -569,6 +569,7 @@
     "llmBackoffCapPlaceholder": "最大待機時間を入力",
     "llmBackoffCapRequired": "バックオフ最大待機時間は必須です",
     "llmBackoffCapMin": "バックオフ最大待機時間は0.5秒以上である必要があります",
+    "llmBackoffCapGteBase": "バックオフ最大待機時間は初期待機時間以上である必要があります",
     "contextManagementTitle": "コンテキスト管理",
     "maxIters": "最大反復回数",
     "maxItersTooltip": "ReActエージェントの推論・行動サイクルの最大反復回数",

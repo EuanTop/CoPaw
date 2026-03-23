@@ -8,6 +8,7 @@ interface LlmRetryCardProps {
 
 export function LlmRetryCard({ llmRetryEnabled = true }: LlmRetryCardProps) {
   const { t } = useTranslation();
+  const form = Form.useFormInstance();
 
   return (
     <Card
@@ -67,7 +68,6 @@ export function LlmRetryCard({ llmRetryEnabled = true }: LlmRetryCardProps) {
       >
         <InputNumber
           style={{ width: "100%" }}
-          min={0.1}
           step={0.1}
           disabled={!llmRetryEnabled}
           placeholder={t("agentConfig.llmBackoffBasePlaceholder")}
@@ -77,6 +77,7 @@ export function LlmRetryCard({ llmRetryEnabled = true }: LlmRetryCardProps) {
       <Form.Item
         label={t("agentConfig.llmBackoffCap")}
         name="llm_backoff_cap"
+        dependencies={["llm_backoff_base"]}
         rules={[
           {
             required: true,
@@ -87,12 +88,24 @@ export function LlmRetryCard({ llmRetryEnabled = true }: LlmRetryCardProps) {
             min: 0.5,
             message: t("agentConfig.llmBackoffCapMin"),
           },
+          {
+            validator: async (_, value) => {
+              const backoffBase = form.getFieldValue("llm_backoff_base");
+              if (
+                typeof value !== "number" ||
+                typeof backoffBase !== "number" ||
+                value >= backoffBase
+              ) {
+                return;
+              }
+              throw new Error(t("agentConfig.llmBackoffCapGteBase"));
+            },
+          },
         ]}
         tooltip={t("agentConfig.llmBackoffCapTooltip")}
       >
         <InputNumber
           style={{ width: "100%" }}
-          min={0.5}
           step={0.5}
           disabled={!llmRetryEnabled}
           placeholder={t("agentConfig.llmBackoffCapPlaceholder")}

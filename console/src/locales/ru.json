@@ -574,6 +574,7 @@
     "llmBackoffCapPlaceholder": "Введите макс. задержку",
     "llmBackoffCapRequired": "Требуется указать макс. задержку backoff",
     "llmBackoffCapMin": "Макс. задержка backoff должна быть не меньше 0.5 секунды",
+    "llmBackoffCapGteBase": "Макс. задержка backoff должна быть не меньше базовой задержки",
     "contextManagementTitle": "Управление контекстом",
     "maxIters": "Макс. итераций",
     "maxItersTooltip": "Максимальное число итераций рассуждение-действие для агента ReAct",

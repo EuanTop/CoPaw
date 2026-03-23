@@ -617,6 +617,7 @@
     "llmBackoffCapPlaceholder": "Enter max delay",
     "llmBackoffCapRequired": "Backoff max delay is required",
     "llmBackoffCapMin": "Backoff max delay must be at least 0.5 seconds",
+    "llmBackoffCapGteBase": "Backoff max delay must be greater than or equal to the base delay",
     "contextManagementTitle": "Context Management",
     "maxIters": "Max Iterations",
     "maxItersTooltip": "Maximum number of reasoning-acting iterations for ReAct agent",

@@ -583,6 +583,7 @@
     "llmBackoffCapPlaceholder": "请输入最大延迟",
     "llmBackoffCapRequired": "退避最大延迟为必填项",
     "llmBackoffCapMin": "退避最大延迟必须大于等于 0.5 秒",
+    "llmBackoffCapGteBase": "退避最大延迟必须大于等于基础延迟",
     "contextManagementTitle": "上下文管理",
     "maxIters": "最大迭代次数",
     "maxItersTooltip": "ReAct 智能体的最大推理-行动迭代次数",

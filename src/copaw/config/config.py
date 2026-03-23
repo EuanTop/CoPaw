@@ -285,8 +285,21 @@ class AgentsRunningConfig(BaseModel):
     llm_backoff_cap: float = Field(
         default=LLM_BACKOFF_CAP,
         ge=0.5,
-        description="Maximum delay cap in seconds for LLM retry backoff",
+        description=(
+            "Maximum delay cap in seconds for LLM retry backoff; "
+            "must be greater than or equal to the base delay"
+        ),
     )
+
+    @model_validator(mode="after")
+    def validate_llm_retry_backoff(self) -> "AgentsRunningConfig":
+        """Validate LLM retry backoff relationships."""
+        if self.llm_backoff_cap < self.llm_backoff_base:
+            raise ValueError(
+                "llm_backoff_cap must be greater than or equal to "
+                "llm_backoff_base",
+            )
+        return self
 
     token_count_model: str = Field(
         default="default",
